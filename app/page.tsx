@@ -274,7 +274,7 @@ export default function MarketeerLanding() {
                     value={featureXid}
                     onChange={(e) => setFeatureXid(e.target.value)}
                     placeholder="@yourXid"
-                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all"
+                    className="w-full px-4 py-3 text-gray-800 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all"
                   />
                 </div>
                 
@@ -288,7 +288,7 @@ export default function MarketeerLanding() {
                     placeholder="Describe the feature you'd like to see..."
                     required
                     rows={4}
-                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all resize-none"
+                    className="w-full px-4 py-3 text-gray-800 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all resize-none"
                   />
                 </div>
                 
