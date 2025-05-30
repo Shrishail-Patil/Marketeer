@@ -7,7 +7,7 @@ export function useSmoothScroll() {
 
     let current = 0
     let target = 0
-    let ease = 0.075
+    const ease = 0.075
 
     const updateScroll = () => {
       target = window.scrollY
