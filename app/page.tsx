@@ -79,7 +79,7 @@ export default function MarketeerLanding() {
     let rafId: number | null = null
     let currentScroll = window.pageYOffset
     let targetScroll = window.pageYOffset
-    let ease = 0.08
+    const ease = 0.08
 
     const updateScroll = () => {
       targetScroll = window.pageYOffset
@@ -108,14 +108,14 @@ export default function MarketeerLanding() {
     }
   }, [])
 
-  const handleWaitlistSubmit = async (e:any) => {
+  const handleWaitlistSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsLoading(true)
     
     try {
-      const { data, error } = await supabase
-  .from('waitlist')
-  .insert([{ Xid }])
+      await supabase
+        .from('waitlist')
+        .insert([{ Xid }])
       await new Promise(resolve => setTimeout(resolve, 1000))
       setIsSubmitted(true)
       setXid("")
@@ -154,12 +154,12 @@ export default function MarketeerLanding() {
     }
   }
 
-  const handleFeatureRequest = async (e: any) => {
+  const handleFeatureRequest = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsFeatureSubmitting(true)
     
     try {
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from('feature_requests')
         .insert([{ 
           Xid: featureXid || null, 
@@ -260,7 +260,7 @@ export default function MarketeerLanding() {
             </div>
             
             <p className="text-gray-600 mb-6">
-              Have an idea for Marketeer? We'd love to hear from you!
+              Have an idea for Marketeer? We&apos;d love to hear from you!
             </p>
 
             {!featureSubmitted ? (
@@ -434,10 +434,10 @@ export default function MarketeerLanding() {
             {/* Waitlist Form */}
             <motion.div variants={itemVariants} className="mb-12">
               {!isSubmitted ? (
-                <div className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+                <form onSubmit={handleWaitlistSubmit} className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
                   <div className="flex-1">
                     <input
-                      type="Xid"
+                      type="text"
                       value={Xid}
                       onChange={(e) => setXid(e.target.value)}
                       placeholder="@yourXid"
@@ -448,7 +448,6 @@ export default function MarketeerLanding() {
                   <motion.button
                     type="submit"
                     disabled={isLoading}
-                    onClick={handleWaitlistSubmit}
                     className="px-7 py-3.5 bg-gradient-to-r from-blue-600 via-blue-700 to-purple-600 hover:from-blue-700 hover:via-blue-800 hover:to-purple-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl active:shadow-md transition-all duration-200 text-base group disabled:opacity-50 disabled:cursor-not-allowed min-w-[140px] flex items-center justify-center"
                     whileHover={{ scale: 1.02, y: -1 }}
                     whileTap={{ scale: 0.98 }}
@@ -462,7 +461,7 @@ export default function MarketeerLanding() {
                       </>
                     )}
                   </motion.button>
-                </div>
+                </form>
               ) : (
                 <motion.div
                   initial={{ scale: 0.8, opacity: 0 }}
@@ -470,7 +469,7 @@ export default function MarketeerLanding() {
                   className="flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 rounded-xl max-w-md mx-auto shadow-sm"
                 >
                   <CheckCircle className="w-6 h-6 text-green-600" />
-                  <span className="text-green-800 font-semibold">You're on the waitlist! 🎉</span>
+                  <span className="text-green-800 font-semibold">You&apos;re on the waitlist! 🎉</span>
                 </motion.div>
               )}
 
@@ -601,7 +600,6 @@ export default function MarketeerLanding() {
                 <motion.button
                   type="submit"
                   disabled={isLoading}
-                  onClick={handleWaitlistSubmit}
                   className="px-7 py-3.5 bg-gradient-to-r from-blue-600 via-blue-700 to-purple-600 hover:from-blue-700 hover:via-blue-800 hover:to-purple-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl active:shadow-md transition-all duration-200 text-base group disabled:opacity-50 disabled:cursor-not-allowed min-w-[140px] flex items-center justify-center"
                   whileHover={{ scale: 1.02, y: -1 }}
                   whileTap={{ scale: 0.98 }}
