@@ -7,6 +7,7 @@ export default function SmoothScrollWrapper({ children }: { children: ReactNode 
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
+    
     let current = 0;
     let target = 0;
     const ease = 0.075;
